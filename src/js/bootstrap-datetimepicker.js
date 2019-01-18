@@ -1221,6 +1221,9 @@
                     };
 
                 if (input.prop('disabled') || (!options.ignoreReadonly && input.prop('readonly')) || widget) {
+                    if (options.defaultViewTime) {
+                        setValue(parseInputDate(options.defaultViewTime));
+                    }
                     return picker;
                 }
                 if (input.val() !== undefined && input.val().trim().length !== 0) {
@@ -2327,6 +2330,11 @@
             return picker;
         };
 
+        picker.defaultViewTime = function (defaultViewTime) {
+            options.defaultViewTime = defaultViewTime;
+            return picker;
+        };
+
         // initializing element and component attributes
         if (element.is('input')) {
             input = element;
@@ -2459,6 +2467,7 @@
         defaultDate: false,
         disabledDates: false,
         enabledDates: false,
+        defaultViewTime: false,
         icons: {
             time: 'glyphicon glyphicon-time',
             date: 'glyphicon glyphicon-calendar',
